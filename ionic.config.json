@@ -1,0 +1,7 @@
+{
+  "name": "casahogar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
