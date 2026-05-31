@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Casa Hogar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-margin-bottom">
+    <img src="assets/ninos.jpg" alt="Niños" />
+  </div>
+
+  <ion-button expand="block" color="secondary">Apoyar Ahora</ion-button>
+  <ion-button expand="block" fill="outline">Conócenos</ion-button>
+
+  <ion-list-header>Testimonios</ion-list-header>
+  <ion-card *ngFor="let t of testimonios">
+    <ion-card-content>{{ t.texto }}</ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!----
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="inicio"><ion-icon name="home"></ion-icon></ion-tab-button>
+      <ion-tab-button tab="noticias"><ion-icon name="newspaper"></ion-icon></ion-tab-button>
+      <ion-tab-button tab="donar"><ion-icon name="heart"></ion-icon></ion-tab-button>
+      <ion-tab-button tab="perfil"><ion-icon name="person"></ion-icon></ion-tab-button>
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer>  -->

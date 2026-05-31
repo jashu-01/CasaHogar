@@ -1,0 +1,153 @@
+<ion-content class="ion-padding">
+  
+    <div class="header-green" style="text-align: center; padding: 20px; color: white;">
+      <h1>Crear Cuenta</h1>
+      <h2>Welcome to Casa Hogar.</h2>
+    </div>
+
+  <ion-list>
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">Apellido Paterno</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-label position="floating">Apellido Materno</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="call-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-select placeholder="Selecciona tu edad">
+        <ion-select-option *ngFor="let i of [].constructor(80); let age = index" [value]="age + 18">{{age + 18}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Localidad</ion-label>
+      <ion-select placeholder="Selecciona localidad">
+        <ion-select-option value="fortin">Fortín de las Flores</ion-select-option>
+        <ion-select-option value="cordoba">Córdoba</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [type]="showPassword1 ? 'text' : 'password'"></ion-input>
+      <ion-icon [name]="showPassword1 ? 'eye-off-outline' : 'eye-outline'" slot="end" (click)="togglePassword1()"></ion-icon>
+    </ion-item>
+
+    <ion-item fill="outline" class="ion-margin-bottom">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Repetir Contraseña</ion-label>
+      <ion-input [type]="showPassword2 ? 'text' : 'password'"></ion-input>
+      <ion-icon [name]="showPassword2 ? 'eye-off-outline' : 'eye-outline'" slot="end" (click)="togglePassword2()"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" class="ion-margin-top" color="primary"  fill="clear" (click)="goToRegister()">
+    REGISTRARSE
+  </ion-button>
+
+  <div style="text-align: center; margin-top: 15px;">
+    <p>¿Ya tienes cuenta? <ion-button fill="clear" routerLink="/login">Inicia Sesión</ion-button>
+    </p>
+  </div>
+</ion-content>
+
+
+
+
+
+
+
+
+
+<!----
+<ion-content class="ion-padding">
+  <div class="header-green" style="text-align: center; padding: 20px; color: white;">
+    <h1>Register</h1>
+     <h2>Welcome to Casa Hogar.</h2>
+  </div>
+
+  <div class="login-container">
+   
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Introduce tu nombre</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Introduce tu email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" style="margin-top: 20px;">
+      REGISTER
+    </ion-button>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <p>¿Ya tienes una cuenta? 
+        <ion-button fill="clear" routerLink="/login">Login</ion-button>
+      </p>
+    </div>
+  </div>
+</ion-content> 
+
+-->
+<!--<ion-content>
+  <div class="header-green">
+    <h1>Register</h1>
+    <h2>Welcome to Casa Hogar.</h2>
+  </div>
+
+  <div class="login-container">
+    
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Introduce tu nombre"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Introduce tu email"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="Contraseña"></ion-input>
+      <ion-icon name="eye-off-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-button expand="block" class="login-btn" routerLink="/home">Register</ion-button>
+
+    <p class="register-link" style="text-align: center; margin-top: 20px;">
+      ¿Ya tienes una cuenta? <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</ion-content>
+-->

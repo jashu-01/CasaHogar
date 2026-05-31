@@ -1,0 +1,46 @@
+<ion-content>
+  <div class="header-green">
+    <h1>Login</h1>
+  </div>
+
+  <div class="login-container">
+    <h2>Welcome to Casa Hogar.</h2>
+
+    <ion-item fill="outline" class="custom-input">
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Introduce tu email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+
+    <ion-item fill="outline" class="custom-input">
+       <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <p class="forgot-password">¿Olvidaste tu contraseña?</p>
+
+    <ion-button expand="block" color="primary" (click)="onLogin()">
+      LOGIN
+    </ion-button>
+
+    <p class="divider">o continuar con</p>
+
+    <div class="social-buttons">
+      <ion-button fill="outline">G</ion-button>
+      <ion-button fill="outline">f</ion-button>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;"><p>¿Aún no tienes una cuenta?</p>
+    <ion-button fill="clear" (click)="goToRegister()">
+      Register
+    </ion-button>
+  </div>
+  <!----
+    <div style="text-align: center; margin-top: 20px;">
+      <p>¿Aún no tienes una cuenta? 
+        <ion-button fill="clear" routerLink="/register">Register</ion-button>
+      </p>
+    </div>  -->
+  </div>  
+</ion-content>
+
