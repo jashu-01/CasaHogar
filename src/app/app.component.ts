@@ -13,14 +13,17 @@ import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutlin
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Inicio', url: '/folder/inbox', icon: 'mail' },
+    { title: 'Donar', url: '/folder/outbox', icon: 'paper-plane' },
+    { title: 'Noticias', url: '/folder/favorites', icon: 'heart' },
+    { title: 'Actividades', url: '/folder/archived', icon: 'archive' },
+    { title: 'Perfil', url: '/folder/trash', icon: 'trash' },
+    { title: 'Notificación', url: '/folder/spam', icon: 'warning' },
+    { title: 'Configuración', url: '/folder/spam', icon: 'warning' },
+    { title: 'Ayuda y Soporte', url: '/folder/spam', icon: 'warning' },
+    { title: 'Cerrar Sesión', url: '/folder/spam', icon: 'warning' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = ['Configuración', 'Ayuda y Soporte', 'Cerrar Sesión'];
   constructor() {
     addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp });
   }
