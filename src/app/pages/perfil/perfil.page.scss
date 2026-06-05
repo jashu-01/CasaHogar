@@ -1,0 +1,176 @@
+.perfil-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px 20px;
+  background: var(--ion-color-success);
+
+  .avatar-wrap {
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+
+    .avatar-badge {
+      position: absolute;
+      bottom: 0; right: 0;
+      background: white;
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      ion-icon { font-size: 20px; }
+    }
+  }
+
+  .perfil-nombre {
+    color: #fff; font-size: 20px; font-weight: 700;
+    margin: 0 0 4px; text-align: center;
+  }
+
+  .perfil-email {
+    color: rgba(255,255,255,0.80);
+    font-size: 13px; margin: 0 0 10px;
+  }
+
+  ion-chip { cursor: pointer; }
+}
+
+// ── Avatar circle ─────────────────────────────────────────
+.avatar-circle {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 3px solid rgba(255,255,255,0.60);
+  color: #fff; font-size: 28px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+  &:active { transform: scale(0.95); }
+
+  &.avatar-md {
+    width: 72px; height: 72px; font-size: 26px;
+    background: var(--ion-color-success);
+    border-color: rgba(255,255,255,0.5);
+  }
+}
+
+// ── Stats card ─────────────────────────────────────────────
+.stats-card {
+  margin: -12px 16px 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+
+  ion-col {
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 8px;
+    &:active { background: var(--ion-color-light); }
+  }
+
+  .stat-col { text-align: center; padding: 8px 0; }
+  .stat-num { font-size: 20px; font-weight: 800; color: var(--ion-color-success); margin: 0; }
+  .stat-lbl { font-size: 11px; color: var(--ion-color-medium); margin: 0; }
+  .stat-border { border-left: 1px solid var(--ion-color-light-shade); }
+}
+
+// ── Logout / versión ───────────────────────────────────────
+.logout-wrap { padding: 8px 16px; }
+.version-lbl { text-align: center; font-size: 12px; color: var(--ion-color-medium); margin: 4px 0 0; }
+
+// ── Info avatar header ─────────────────────────────────────
+.info-avatar-header {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 24px 20px 12px;
+  background: var(--ion-color-success);
+}
+
+// ── Edit items ─────────────────────────────────────────────
+.edit-item {
+  margin-bottom: 14px;
+  --border-radius: 12px;
+}
+
+// ── Botones ────────────────────────────────────────────────
+.btn-wrap {
+  padding: 12px 16px 8px;
+  display: flex; flex-direction: column; gap: 8px;
+  ion-button { --border-radius: 14px; font-weight: 600; }
+}
+
+// ── Guardado exitoso ───────────────────────────────────────
+.exito-wrap {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px; text-align: center; min-height: 60vh;
+
+  .exito-icon   { font-size: 96px; margin-bottom: 20px; }
+  .exito-titulo { font-size: 24px; font-weight: 800; color: var(--ion-color-success); margin: 0 0 10px; }
+  .exito-sub    { font-size: 15px; color: var(--ion-color-medium-shade); line-height: 1.6; margin: 0 0 28px; }
+}
+
+// ── Mapa placeholder ───────────────────────────────────────
+.mapa-placeholder {
+  height: 160px;
+  background: linear-gradient(135deg, #e8f4e8, #d4e8d4);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border-bottom: 1px solid var(--ion-color-light-shade);
+  cursor: pointer;
+  transition: filter 0.15s;
+  &:active { filter: brightness(0.95); }
+
+  .mapa-icon  { font-size: 40px; color: var(--ion-color-success); margin-bottom: 6px; }
+  .mapa-label { font-size: 14px; font-weight: 600; color: var(--ion-color-success-shade); margin: 0 0 4px; }
+  .mapa-tap   { font-size: 11px; color: var(--ion-color-medium); margin: 0; }
+}
+
+// ── Logros ─────────────────────────────────────────────────
+.logros-resumen {
+  margin: 12px 16px; border-radius: 16px;
+
+  .logros-total {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-bottom: 12px;
+    ion-icon   { font-size: 26px; }
+    .logros-num{ font-size: 26px; font-weight: 800; color: var(--ion-color-warning); }
+    .logros-de { font-size: 14px; color: var(--ion-color-medium); }
+  }
+
+  .logros-barra {
+    height: 8px;
+    background: var(--ion-color-light-shade);
+    border-radius: 4px;
+    overflow: hidden;
+
+    .logros-barra-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ion-color-warning), var(--ion-color-success));
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+  }
+}
+
+.logro-icon-wrap {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--ion-color-light);
+  display: flex; align-items: center; justify-content: center;
+  ion-icon { font-size: 20px; }
+  &.logro-obtenido { background: rgba(var(--ion-color-warning-rgb), 0.15); }
+}
+
+// ── Soporte banner ─────────────────────────────────────────
+.soporte-banner {
+  margin: 12px 16px; border-radius: 16px; text-align: center;
+  ion-card-content {
+    .soporte-banner-icon { font-size: 44px; color: rgba(255,255,255,0.90); display: block; margin-bottom: 8px; }
+    h3 { color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+    p  { color: rgba(255,255,255,0.80); font-size: 13px; margin: 0; }
+  }
+}
+
+// ── FAQ ────────────────────────────────────────────────────
+.faq-respuesta {
+  padding: 12px 20px 16px;
+  background: var(--ion-color-light);
+  p { font-size: 13.5px; color: var(--ion-color-medium-shade); line-height: 1.65; margin: 0; }
+}

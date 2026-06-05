@@ -1,31 +1,137 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Casa Hogar</ion-title>
+  <ion-toolbar class="home-toolbar">
+    <!-- Título centrado -->
+    <ion-title class="home-title">Casa Hogar</ion-title>
+
+    <!-- Derecha: notificaciones + hamburguesa -->
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="openNotifications()" aria-label="Notificaciones">
+        <ion-icon name="notifications-outline" color="light"></ion-icon>
+      </ion-button>
+      <ion-menu-button color="light" menu="mainMenu" aria-label="Abrir menú"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="ion-margin-bottom">
-    <img src="assets/ninos.jpg" alt="Niños" />
+<ion-content [fullscreen]="true" class="home-content">
+
+  <!--  carrusel de imagen -->
+  <ion-card class="hero-card">
+    <img src="../../../assets/ima2.png" alt="Niños Casa Hogar" class="hero-img"
+         onerror="this.style.display='none'" />
+    <div class="hero-overlay"></div>
+
+    <ion-card-header class="hero-card-header">
+      <ion-chip class="hero-chip" outline="true">
+        <ion-label>Comunidad activa</ion-label>
+      </ion-chip>
+      <ion-card-title class="hero-heading">
+        Juntos hacemos<br />la diferencia
+      </ion-card-title>
+      <ion-card-subtitle class="hero-subtitle">
+        Cada niño merece un hogar lleno de amor
+      </ion-card-subtitle>
+    </ion-card-header>
+<!--seccion para apartar imagenes de botones -->
+    <ion-card-content class="hero-card-content">
+      <ion-button expand="block" class="btn-apoyar" (click)="goToDonar()">
+        <ion-icon name="heart" slot="start"></ion-icon>
+        APOYAR AHORA
+      </ion-button>
+      <ion-button expand="block" fill="outline" class="btn-conocenos"
+                  (click)="goToVoluntarios()">
+        CONÓCENOS
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <!-- PENDIENTE para la valoraciones de los valores y seguridad-->
+  <div class="section-block">
+    <div class="section-header">
+      <ion-label class="section-title">Impacto Real</ion-label>
+      <ion-note class="section-link" (click)="verMas('impacto')">Ver todo</ion-note>
+    </div>
+
+    <ion-grid class="stats-grid">
+      <ion-row>
+        <ion-col *ngFor="let s of stats" size="3">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <ion-icon [name]="s.icon" class="stat-icon"></ion-icon>
+              <ion-label class="stat-number">{{ s.numero }}</ion-label>
+              <ion-note class="stat-label">{{ s.label }}</ion-note>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 
-  <ion-button expand="block" color="secondary">Apoyar Ahora</ion-button>
-  <ion-button expand="block" fill="outline">Conócenos</ion-button>
+  <!-- redirigir a actividades de la casa hogar -->
+  <div class="section-block">
+    <div class="section-header">
+      <ion-label class="section-title">Actividades Recientes</ion-label>
+      <ion-note class="section-link" (click)="goToActividades()">Ver más</ion-note>
+    </div>
 
-  <ion-list-header>Testimonios</ion-list-header>
-  <ion-card *ngFor="let t of testimonios">
-    <ion-card-content>{{ t.texto }}</ion-card-content>
-  </ion-card>
+    <div class="activities-scroll">
+      <ion-card class="activity-card" *ngFor="let act of actividadesDestacadas"
+                button="true" (click)="goToActividades()">
+        <ion-card-content class="activity-card-content">
+          <div class="activity-icon-wrap" [style.background]="act.color">
+            <ion-icon [name]="act.icon"></ion-icon>
+          </div>
+          <ion-label class="activity-label">{{ act.nombre }}</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- seccion para mostrar testimos, por el momento  al ser voluntaio podra realizar comentarios -publicar- o de anteriores -->
+  <div class="section-block">
+    <div class="section-header">
+      <ion-label class="section-title">Testimonios</ion-label>
+    </div>
+
+    <ion-card class="testimonio-card" *ngFor="let t of testimonios">
+      <ion-item lines="none" class="testimonio-item">
+        <ion-avatar slot="start" class="testimonio-avatar"
+                    [style.background]="t.avatarColor">
+          <span class="avatar-initials">{{ t.iniciales }}</span>
+        </ion-avatar>
+        <ion-label>
+          <ion-card-title class="testimonio-nombre">{{ t.nombre }}</ion-card-title>
+          <ion-card-subtitle class="testimonio-rol">{{ t.rol }}</ion-card-subtitle>
+        </ion-label>
+        <ion-note slot="end" class="stars">
+          <ion-icon name="star" *ngFor="let s of starsArray"></ion-icon>
+        </ion-note>
+      </ion-item>
+      <ion-card-content>
+        <ion-note class="testimonio-texto">"{{ t.texto }}"</ion-note>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!--preguntamos si -botton voluntaios- -->
+  <div class="section-block">
+    <ion-card class="voluntario-card" button="true" (click)="goToVoluntarios()">
+      <ion-item lines="none" class="voluntario-item">
+        <ion-thumbnail slot="start" class="voluntario-thumb">
+          <ion-icon name="hand-left-outline" class="voluntario-icon"></ion-icon>
+        </ion-thumbnail>
+        <ion-label>
+          <ion-card-title class="voluntario-title">¿Quieres ser voluntario?</ion-card-title>
+          <ion-card-subtitle class="voluntario-sub">Únete y cambia vidas </ion-card-subtitle>
+          
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" class="voluntario-arrow"></ion-icon>
+      </ion-item>
+    </ion-card>
+  </div>
+  <div style="height: 32px"></div>
 </ion-content>
 
-<!----
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="inicio"><ion-icon name="home"></ion-icon></ion-tab-button>
-      <ion-tab-button tab="noticias"><ion-icon name="newspaper"></ion-icon></ion-tab-button>
-      <ion-tab-button tab="donar"><ion-icon name="heart"></ion-icon></ion-tab-button>
-      <ion-tab-button tab="perfil"><ion-icon name="person"></ion-icon></ion-tab-button>
-    </ion-tab-bar>
-  </ion-toolbar>
-</ion-footer>  -->
+

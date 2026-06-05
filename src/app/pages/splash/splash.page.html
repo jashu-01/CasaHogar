@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Casa Hogar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true" class="splash-content">
+  <div class="splash-wrapper" [class.loaded]="loaded">
+
+    <div class="logo-container">
+      <div class="logo-ring logo-ring--outer"></div>
+      <div class="logo-ring logo-ring--inner"></div>
+      <div class="logo-circle">
+        <img src="assets/logo.png" alt="Casa Hogar" class="logo-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="logo-fallback" style="display:none">
+          <ion-icon name="home-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="splash-text">
+      <h1 class="splash-title">Casa Hogar</h1>
+      <p class="splash-subtitle">Conectando corazones</p>
+    </div>
+
+    <div class="splash-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,13 +1,530 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>donar</ion-title>
+<ion-header>
+  <ion-toolbar class="donar-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="donar-header-title">Casa Hogar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">donar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="donar-content">
+
+  <!--opciones -->
+  <div *ngIf="paso === 0">
+
+    <div class="hero-donar">
+      <div class="hero-donar-overlay"></div>
+      <div class="hero-donar-text">
+        <h2 class="hero-donar-title">Únete a la Causa</h2>
+        <p class="hero-donar-sub">
+          Tu apoyo transforma vidas. Elige cómo quieres contribuir hoy.
+        </p>
+      </div>
+    </div>
+
+    <div class="tipo-section">
+      <h3 class="tipo-title">¿Cómo deseas donar?</h3>
+      <p class="tipo-sub">Cada aportación, sin importar su forma, hace la diferencia.</p>
+
+      <div class="tipo-grid">
+
+        <div class="tipo-card" (click)="seleccionarTipo('efectivo')">
+          <div class="tipo-icon-wrap tipo-efectivo">
+            <ion-icon name="cash-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Efectivo</h4>
+          <p class="tipo-desc">Donación en dinero en efectivo en nuestras instalaciones</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="tipo-card" (click)="seleccionarTipo('transferencia')">
+          <div class="tipo-icon-wrap tipo-transferencia">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Transferencia</h4>
+          <p class="tipo-desc">Pago seguro con tarjeta o transferencia bancaria en línea</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="tipo-card" (click)="seleccionarTipo('ropa')">
+          <div class="tipo-icon-wrap tipo-ropa">
+            <ion-icon name="shirt-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Ropa y Artículos</h4>
+          <p class="tipo-desc">Ropa, calzado, útiles escolares y artículos del hogar</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="tipo-card" (click)="seleccionarTipo('juguetes')">
+          <div class="tipo-icon-wrap tipo-juguetes">
+            <ion-icon name="happy-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Juguetes</h4>
+          <p class="tipo-desc">Juguetes y material didáctico para los niños del hogar</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="tipo-card" (click)="seleccionarTipo('comida')">
+          <div class="tipo-icon-wrap tipo-comida">
+            <ion-icon name="fast-food-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Alimentos</h4>
+          <p class="tipo-desc">Despensa, alimentos no perecederos y productos básicos</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+        <div class="tipo-card" (click)="seleccionarTipo('medicamentos')">
+          <div class="tipo-icon-wrap tipo-medicamentos">
+            <ion-icon name="medkit-outline"></ion-icon>
+          </div>
+          <h4 class="tipo-nombre">Medicamentos</h4>
+          <p class="tipo-desc">Medicamentos básicos, vitaminas y artículos de higiene</p>
+          <div class="tipo-arrow">
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!--DATOS QUE DEBE CARGARSE DEL DASHBOARD DE LA GESTION -->
+    <div class="impacto-strip">
+      <div class="impacto-item">
+        <span class="impacto-num">$280k</span>
+        <span class="impacto-label">Recaudado</span>
+      </div>
+      <div class="impacto-sep"></div>
+      <div class="impacto-item">
+        <span class="impacto-num">1,240</span>
+        <span class="impacto-label">Donadores</span>
+      </div>
+      <div class="impacto-sep"></div>
+      <div class="impacto-item">
+        <span class="impacto-num">85</span>
+        <span class="impacto-label">Familias</span>
+      </div>
+    </div>
+
+    <div style="height: 28px"></div>
+  </div>
+
+
+  <!-- seccion de efect -->
+  <div *ngIf="paso === 1 && tipoSeleccionado === 'efectivo'">
+    <div class="subpage-header">
+      <ion-button fill="clear" class="back-btn-inline" (click)="volver()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h2 class="subpage-title">Donación en Efectivo</h2>
+    </div>
+
+    <div class="info-card info-green">
+      <ion-icon name="location-outline" class="info-card-icon"></ion-icon>
+      <div>
+        <h4 class="info-card-title">Punto de entrega</h4>
+        <p class="info-card-text">Casa Hogar Córdoba<br>Calle Rosales #42, Col. Centro<br>Córdoba, Ver. CP 94500</p>
+        <p class="info-card-text"><strong>Horario:</strong> Lun–Vie 9:00–17:00, Sáb 9:00–13:00</p>
+      </div>
+    </div>
+
+    <div class="info-card info-blue">
+      <ion-icon name="person-circle-outline" class="info-card-icon"></ion-icon>
+      <div>
+        <h4 class="info-card-title">Persona que recibirá</h4>
+        <p class="info-card-text">Lic. <strong>Carmen Rodríguez</strong> — Coordinadora de Donaciones<br>
+          Ext. contacto: <strong>271-312-0055</strong></p>
+        <p class="info-card-text">Presenta tu ID oficial. Se entrega <strong>recibo oficial</strong> de donación.</p>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3 class="form-section-title">Registra tu donación</h3>
+
+      <div class="input-group">
+        <label class="input-label">Tu nombre completo *</label>
+        <div class="input-wrap">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.nombre" placeholder="Nombre completo" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Correo electrónico *</label>
+        <div class="input-wrap">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.email" type="email" placeholder="tu@correo.com" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Monto aproximado que donarás *</label>
+        <div class="montos-chips">
+          <ion-chip *ngFor="let m of montos" [class.monto-active]="form.monto === m"
+                    (click)="form.monto = m" class="monto-chip">
+            ${{ m }}
+          </ion-chip>
+          <ion-chip [class.monto-active]="form.monto === 'otro'"
+                    (click)="form.monto = 'otro'" class="monto-chip">Otro</ion-chip>
+        </div>
+        <div class="input-wrap" *ngIf="form.monto === 'otro'" style="margin-top:10px">
+          <ion-icon name="cash-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.montoPersonalizado" type="number"
+                     placeholder="Ingresa el monto" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Mensaje (opcional)</label>
+        <ion-textarea [(ngModel)]="form.mensaje" placeholder="Escribe algo para la comunidad..."
+                      rows="3" class="ci-area"></ion-textarea>
+      </div>
+
+      <ion-button expand="block" class="btn-confirmar" (click)="confirmarDonacion()">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Confirmar Visita
+      </ion-button>
+    </div>
+    <div style="height:28px"></div>
+  </div>
+
+
+  <!-- para transferencia form -->
+  <div *ngIf="paso === 1 && tipoSeleccionado === 'transferencia'">
+    <div class="subpage-header">
+      <ion-button fill="clear" class="back-btn-inline" (click)="volver()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h2 class="subpage-title">Donación en Línea</h2>
+    </div>
+
+    <!-- Selector método -->
+    <div class="metodo-tabs">
+      <button [class.metodo-active]="metodo === 'tarjeta'" (click)="metodo = 'tarjeta'" class="metodo-btn">
+        <ion-icon name="card-outline"></ion-icon> Tarjeta
+      </button>
+      <button [class.metodo-active]="metodo === 'banco'" (click)="metodo = 'banco'" class="metodo-btn">
+        <ion-icon name="business-outline"></ion-icon> Transferencia
+      </button>
+    </div>
+
+    <!-- Formulario Tarjeta -->
+    <div class="form-section" *ngIf="metodo === 'tarjeta'">
+      <div class="secure-badge">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        <span>Pago seguro con cifrado SSL 256-bit</span>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Nombre del titular *</label>
+        <div class="input-wrap">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.nombre" placeholder="Como aparece en la tarjeta" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Correo electrónico *</label>
+        <div class="input-wrap">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.email" type="email" placeholder="Para tu comprobante" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Número de tarjeta *</label>
+        <div class="input-wrap">
+          <ion-icon name="card-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.numeroTarjeta" type="tel" placeholder="0000 0000 0000 0000"
+                     maxlength="19" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group" style="flex:1">
+          <label class="input-label">Vencimiento *</label>
+          <div class="input-wrap">
+            <ion-input [(ngModel)]="form.vencimiento" placeholder="MM/AA" maxlength="5" class="ci"></ion-input>
+          </div>
+        </div>
+        <div class="input-group" style="flex:1">
+          <label class="input-label">CVV *</label>
+          <div class="input-wrap">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input [(ngModel)]="form.cvv" type="password" placeholder="•••" maxlength="4" class="ci"></ion-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Monto a donar *</label>
+        <div class="montos-chips">
+          <ion-chip *ngFor="let m of montos" [class.monto-active]="form.monto === m"
+                    (click)="form.monto = m" class="monto-chip">${{m}}</ion-chip>
+          <ion-chip [class.monto-active]="form.monto === 'otro'"
+                    (click)="form.monto = 'otro'" class="monto-chip">Otro</ion-chip>
+        </div>
+        <div class="input-wrap" *ngIf="form.monto === 'otro'" style="margin-top:10px">
+          <ion-icon name="cash-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.montoPersonalizado" type="number"
+                     placeholder="Monto en pesos" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Mensaje (opcional)</label>
+        <ion-textarea [(ngModel)]="form.mensaje" placeholder="Un mensaje para la comunidad..." rows="2" class="ci-area"></ion-textarea>
+      </div>
+
+      <div class="resumen-pago" *ngIf="form.monto">
+        <div class="resumen-row">
+          <span>Donación</span>
+          <span>${{ form.monto === 'otro' ? (form.montoPersonalizado || '0') : form.monto }} MXN</span>
+        </div>
+        <div class="resumen-row resumen-total">
+          <span>Total</span>
+          <span>${{ form.monto === 'otro' ? (form.montoPersonalizado || '0') : form.monto }} MXN</span>
+        </div>
+      </div>
+
+      <ion-button expand="block" class="btn-confirmar" (click)="confirmarDonacion()">
+        <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+        Donar Ahora
+      </ion-button>
+    </div>
+
+    <!-- Datos bancarios -->
+    <div class="form-section" *ngIf="metodo === 'banco'">
+      <div class="secure-badge">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        <span>Transferencia verificada — recibe comprobante al instante</span>
+      </div>
+
+      <div class="banco-card">
+        <h4 class="banco-titulo">Datos bancarios</h4>
+        <div class="banco-row">
+          <span class="banco-label">Banco</span>
+          <span class="banco-valor">BBVA México</span>
+        </div>
+        <div class="banco-row">
+          <span class="banco-label">Titular</span>
+          <span class="banco-valor">Casa Hogar Córdoba A.C.</span>
+        </div>
+        <div class="banco-row">
+          <span class="banco-label">CLABE</span>
+          <span class="banco-valor copy-text" (click)="copiar('012900012345678901')">
+            012900012345678901 <ion-icon name="copy-outline"></ion-icon>
+          </span>
+        </div>
+        <div class="banco-row">
+          <span class="banco-label">Cuenta</span>
+          <span class="banco-valor copy-text" (click)="copiar('0123456789')">
+            0123456789 <ion-icon name="copy-outline"></ion-icon>
+          </span>
+        </div>
+        <div class="banco-row">
+          <span class="banco-label">RFC</span>
+          <span class="banco-valor">CHC-201001-AB3</span>
+        </div>
+      </div>
+
+      <div class="input-group" style="margin-top:20px">
+        <label class="input-label">Tu nombre *</label>
+        <div class="input-wrap">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.nombre" placeholder="Nombre completo" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Correo para comprobante *</label>
+        <div class="input-wrap">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.email" type="email" placeholder="tu@correo.com" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Monto transferido *</label>
+        <div class="input-wrap">
+          <ion-icon name="cash-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.montoPersonalizado" type="number" placeholder="$0.00" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="info-card info-gold" style="margin: 0 0 16px">
+        <ion-icon name="information-circle-outline" class="info-card-icon"></ion-icon>
+        <p class="info-card-text" style="margin:0">
+          Realiza la transferencia y envíanos el comprobante. Recibirás confirmación en tu correo.
+        </p>
+      </div>
+
+      <ion-button expand="block" class="btn-confirmar" (click)="confirmarDonacion()">
+        <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+        Ya Realicé la Transferencia
+      </ion-button>
+    </div>
+    <div style="height:28px"></div>
+  </div>
+
+
+  <!-- ESPECIE TIPO DE DONACION-->
+  <div *ngIf="paso === 1 && esEspecie">
+    <div class="subpage-header">
+      <ion-button fill="clear" class="back-btn-inline" (click)="volver()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h2 class="subpage-title">Donar {{ tipoConfig.label }}</h2>
+    </div>
+
+    <!-- Qué aceptamos -->
+    <div class="info-card" [ngClass]="tipoConfig.infoClass">
+      <ion-icon [name]="tipoConfig.icon" class="info-card-icon"></ion-icon>
+      <div>
+        <h4 class="info-card-title">¿Qué aceptamos?</h4>
+        <ul class="acepta-list">
+          <li *ngFor="let item of tipoConfig.acepta">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- No aceptamos -->
+    <div class="info-card info-red">
+      <ion-icon name="close-circle-outline" class="info-card-icon"></ion-icon>
+      <div>
+        <h4 class="info-card-title">No aceptamos</h4>
+        <ul class="acepta-list">
+          <li *ngFor="let item of tipoConfig.noAcepta">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dónde y a quién -->
+    <div class="info-card info-green">
+      <ion-icon name="location-outline" class="info-card-icon"></ion-icon>
+      <div>
+        <h4 class="info-card-title">Punto de entrega</h4>
+        <p class="info-card-text">
+          Casa Hogar Córdoba<br>Calle Rosales #42, Col. Centro<br>Córdoba, Ver.
+        </p>
+        <p class="info-card-text"><strong>Horario:</strong> Lun–Vie 9:00–17:00 · Sáb 9:00–13:00</p>
+        <p class="info-card-text">
+          <strong>Recibe:</strong> Lic. Carmen Rodríguez<br>
+          Tel: <strong>271-312-0055</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-section">
+      <h3 class="form-section-title">Registra tu donación</h3>
+
+      <div class="input-group">
+        <label class="input-label">Tu nombre *</label>
+        <div class="input-wrap">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.nombre" placeholder="Nombre completo" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Correo electrónico *</label>
+        <div class="input-wrap">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.email" type="email" placeholder="tu@correo.com" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">¿Qué vas a traer? *</label>
+        <ion-textarea [(ngModel)]="form.descripcionEspecie"
+                      [placeholder]="tipoConfig.placeholder"
+                      rows="3" class="ci-area"></ion-textarea>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Fecha aproximada de entrega</label>
+        <div class="input-wrap">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-input [(ngModel)]="form.fechaEntrega" type="date" class="ci"></ion-input>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Mensaje (opcional)</label>
+        <ion-textarea [(ngModel)]="form.mensaje" placeholder="Un mensaje para los niños..." rows="2" class="ci-area"></ion-textarea>
+      </div>
+
+      <ion-button expand="block" class="btn-confirmar" (click)="confirmarDonacion()">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Confirmar Donación
+      </ion-button>
+    </div>
+    <div style="height:28px"></div>
+  </div>
+
+
+  <!--intterfaz de motivacion ggracia -->
+  <div *ngIf="paso === 2" class="gracias-container">
+
+    <div class="gracias-circle">
+      <ion-icon name="heart" class="gracias-icon"></ion-icon>
+    </div>
+
+    <h2 class="gracias-titulo">¡Gracias de Corazón!</h2>
+    <p class="gracias-sub">
+      Tu donación de <strong>{{ resumenDonacion.tipo }}</strong> ha sido registrada.<br>
+      Enviamos la confirmación a <strong>{{ form.email }}</strong>.
+    </p>
+
+    <div class="gracias-card">
+      <div class="gracias-row" *ngIf="resumenDonacion.monto">
+        <span class="gracias-label">Monto</span>
+        <span class="gracias-valor">{{ resumenDonacion.monto }}</span>
+      </div>
+      <div class="gracias-row">
+        <span class="gracias-label">Tipo</span>
+        <span class="gracias-valor">{{ resumenDonacion.tipo }}</span>
+      </div>
+      <div class="gracias-row" *ngIf="resumenDonacion.metodo">
+        <span class="gracias-label">Método</span>
+        <span class="gracias-valor">{{ resumenDonacion.metodo }}</span>
+      </div>
+      <div class="gracias-row">
+        <span class="gracias-label">Donador</span>
+        <span class="gracias-valor">{{ form.nombre }}</span>
+      </div>
+      <div class="gracias-row">
+        <span class="gracias-label">Folio</span>
+        <span class="gracias-valor folio">{{ resumenDonacion.folio }}</span>
+      </div>
+    </div>
+
+    <div class="email-aviso">
+      <ion-icon name="mail-outline"></ion-icon>
+      <p>Te enviamos un correo con el comprobante y más información sobre el impacto de tu donación.</p>
+    </div>
+
+    <div class="gracias-actions">
+      <ion-button expand="block" class="btn-confirmar" (click)="nuevaDonacion()">
+        <ion-icon name="heart-outline" slot="start"></ion-icon>
+        Donar Nuevamente
+      </ion-button>
+      <ion-button expand="block" fill="outline" class="btn-outline-green" (click)="irAInicio()">
+        Volver al Inicio
+      </ion-button>
+    </div>
+    <div style="height:32px"></div>
+  </div>
 </ion-content>
+
+

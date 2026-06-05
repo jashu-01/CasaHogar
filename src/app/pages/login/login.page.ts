@@ -29,10 +29,7 @@ import { personOutline, lockClosedOutline } from 'ionicons/icons';
 })
 export class LoginPage implements OnInit {
 
-
-
   constructor(private router: Router) { 
-
     addIcons({ personOutline, lockClosedOutline });
   }
   
@@ -44,8 +41,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/register']);
   }
   onLogin() {
-    //  validación de usuario
-     this.router.navigate(['/tabs/home']);
+    this.router.navigate(['/tabs/home']);
 
   }
   ngOnInit() { }

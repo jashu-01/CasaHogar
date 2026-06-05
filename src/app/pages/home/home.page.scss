@@ -1,5 +1,357 @@
-:root {
-  --ion-color-primary: #3B5998; /* Azul */
-  --ion-color-secondary: #C18C5D; /* Ocre */
-  --ion-color-tertiary: #2D5A27; /* Verde */
+$green-dark : #1e5c1e;
+$green-mid  : #2d7a2d;
+$gold       : #c8912a;
+$cream      : #f5f0e8;
+$white      : #ffffff;
+$text-dark  : #1a1a1a;
+$text-muted : #6b7280;
+
+// ══ TOOLBAR ══════════════════════════════════════════════════════════════
+.home-toolbar {
+  --background: #{$green-dark};
+  .home-title { color: $white; font-weight: 700; font-size: 18px; }
 }
+
+// ══ ION-CONTENT ══════════════════════════════════════════════════════════
+// ⚠️ Solo --background. NUNCA height, overflow, display, flex aquí.
+// ion-content gestiona su propio viewport de scroll internamente.
+.home-content {
+  --background: #{$cream};
+}
+
+// ══ HERO CARD ════════════════════════════════════════════════════════════
+// La imagen es absolute (decorativa). Header y content en flujo normal.
+.hero-card {
+  --background: linear-gradient(135deg, #{$green-dark} 0%, #163d7a 100%);
+  --border-radius: 0;
+  --box-shadow: none;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(20,60,20,.30) 0%, rgba(20,60,20,.88) 100%);
+    z-index: 1;
+  }
+
+  ion-card-header.hero-card-header {
+    position: relative;
+    z-index: 2;
+    padding: 32px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    .hero-chip {
+      --background: rgba(255,255,255,.18);
+      --color: rgba(255,255,255,.92);
+      --border-color: transparent;
+      font-size: 11px;
+      font-weight: 500;
+      height: 24px;
+      margin: 0;
+      letter-spacing: .5px;
+    }
+
+    ion-card-title.hero-heading {
+      color: $white;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    ion-card-subtitle.hero-subtitle {
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      text-transform: none;
+      margin: 0;
+    }
+  }
+
+  ion-card-content.hero-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px 16px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .btn-apoyar {
+      --background: #{$gold};
+      --background-activated: #a07020;
+      --border-radius: 10px;
+      --color: #{$white};
+      font-size: 14px;
+      font-weight: 700;
+      height: 46px;
+      letter-spacing: 1px;
+    }
+
+    .btn-conocenos {
+      --border-radius: 10px;
+      --color: #{$white};
+      --border-color: rgba(255,255,255,.65);
+      --border-width: 1.5px;
+      font-size: 14px;
+      font-weight: 600;
+      height: 46px;
+    }
+  }
+}
+/* Asegura que el carrusel ocupe el ancho disponible */
+swiper-container {
+  display: block;
+  width: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  height: 250px; /* Define una altura fija para uniformidad */
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin estirarse */
+}
+// ══ SECTION BLOCK ════════════════════════════════════════════════════════
+// div simple — no interfiere con el scroll de ion-content
+.section-block {
+  padding: 20px 16px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  ion-label.section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: $text-dark;
+  }
+
+  ion-note.section-link {
+    font-size: 13px;
+    color: $green-mid;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+// ══ STATS ════════════════════════════════════════════════════════════════
+.stats-grid {
+  --ion-grid-padding: 0;
+  --ion-grid-column-padding: 3px;
+  padding: 0;
+
+  ion-col { padding: 3px; }
+}
+
+.stat-card {
+  --background: #{$white};
+  --border-radius: 14px;
+  --box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  margin: 0;
+
+  ion-card-content {
+    padding: 14px 4px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    .stat-icon { font-size: 22px; color: $green-mid; }
+
+    ion-label.stat-number {
+      font-size: 15px;
+      font-weight: 800;
+      color: $text-dark;
+      text-align: center;
+      display: block;
+    }
+
+    ion-note.stat-label {
+      font-size: 10px;
+      color: $text-muted;
+      text-align: center;
+      display: block;
+      line-height: 1.2;
+    }
+  }
+}
+
+// ══ ACTIVIDADES ══════════════════════════════════════════════════════════
+.activities-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.activity-card {
+  --background: #{$white};
+  --border-radius: 16px;
+  --box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  margin: 0;
+  flex-shrink: 0;
+  width: 80px;
+
+  ion-card-content.activity-card-content {
+    padding: 12px 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    .activity-icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      ion-icon { font-size: 22px; color: $white; }
+    }
+
+    ion-label.activity-label {
+      font-size: 10px;
+      color: $text-dark;
+      font-weight: 500;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.2;
+      display: block;
+    }
+  }
+}
+
+// ══ TESTIMONIOS ══════════════════════════════════════════════════════════
+.testimonio-card {
+  --background: #{$white};
+  --border-radius: 16px;
+  --box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  margin: 0 0 12px 0;
+
+  ion-item.testimonio-item {
+    --background: transparent;
+    --padding-start: 14px;
+    --inner-padding-end: 10px;
+    --min-height: 54px;
+
+    ion-avatar.testimonio-avatar {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .avatar-initials {
+        color: $white;
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+
+    ion-label {
+      ion-card-title.testimonio-nombre {
+        font-size: 14px;
+        font-weight: 600;
+        color: $text-dark;
+      }
+      ion-card-subtitle.testimonio-rol {
+        font-size: 11px;
+        color: $text-muted;
+        text-transform: none;
+      }
+    }
+
+    ion-note.stars {
+      display: flex;
+      gap: 1px;
+      align-items: center;
+      ion-icon { font-size: 12px; color: $gold; }
+    }
+  }
+
+  ion-card-content {
+    padding: 0 16px 14px;
+
+    ion-note.testimonio-texto {
+      font-size: 13px;
+      color: $text-muted;
+      line-height: 1.6;
+      font-style: italic;
+      display: block;
+    }
+  }
+}
+
+// ══ VOLUNTARIO ═══════════════════════════════════════════════════════════
+.voluntario-card {
+  --background: linear-gradient(135deg, #{$green-dark} 0%, #{$green-mid} 100%);
+  --border-radius: 16px;
+  --box-shadow: 0 4px 16px rgba(30,92,30,.28);
+  margin: 0;
+
+  ion-item.voluntario-item {
+    --background: transparent;
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    --min-height: 72px;
+
+    ion-thumbnail.voluntario-thumb {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,.15);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .voluntario-icon {
+        font-size: 26px;
+        color: rgba(255,255,255,.90);
+      }
+    }
+
+    ion-label {
+      ion-card-title.voluntario-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: $white;
+      }
+      ion-card-subtitle.voluntario-sub {
+        font-size: 12px;
+        color: rgba(255,255,255,.70);
+        text-transform: none;
+      }
+    }
+
+    .voluntario-arrow {
+      font-size: 20px;
+      color: rgba(255,255,255,.70);
+    }
+  }
+  .home-content::part(scroll) {
+  overflow-y: auto !important;
+}
+}
+/*
+:root {
+  --ion-color-primary: #3B5998; /* Azul 
+  --ion-color-secondary: #C18C5D; /* Ocre 
+  --ion-color-tertiary: #2D5A27; /* Verde 
+}
+*/

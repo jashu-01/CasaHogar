@@ -1,13 +1,140 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>actividades</ion-title>
+
+<ion-header>
+  <ion-toolbar class="act-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="act-title">Casa Hogar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="filter-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Segmento Todos y guardados -->
+  <ion-toolbar class="segment-toolbar">
+    <ion-segment [(ngModel)]="segmento" color="success" class="act-segment">
+      <ion-segment-button value="todos">
+        <ion-label>Actividades Diarias</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="guardados">
+        <ion-label>Guardados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">actividades</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="act-content">
+
+  <!-- -->
+  <div *ngIf="segmento === 'todos'">
+
+    <!-- menu horizontal  -->
+    <div class="cat-scroll">
+      <ion-chip
+        *ngFor="let cat of categorias"
+        [class.cat-active]="categoriaActiva === cat.valor"
+        (click)="filtrarCategoria(cat.valor)"
+        class="cat-chip">
+        <ion-icon [name]="cat.icon"></ion-icon>
+        <ion-label>{{ cat.label }}</ion-label>
+      </ion-chip>
+    </div>
+
+    <!-- Lista de actividades -->
+    <div class="act-list">
+      <div class="act-card"
+           *ngFor="let act of actividadesFiltradas"
+           (click)="verDetalle(act)">
+
+        <div class="act-card-img" [style.background]="act.color">
+          <img [src]="act.imagen" [alt]="act.nombre" class="act-img"
+               onerror="this.style.display='none'"/>
+          <ion-badge class="act-badge" [style.background]="act.badgeColor">
+            {{ act.categoria }}
+          </ion-badge>
+          <button class="save-btn" (click)="toggleGuardar(act, $event)">
+            <ion-icon [name]="act.guardado ? 'bookmark' : 'bookmark-outline'"
+                      [color]="act.guardado ? 'warning' : 'light'">
+            </ion-icon>
+          </button>
+        </div>
+
+        <div class="act-card-body">
+          <h4 class="act-nombre">{{ act.nombre }}</h4>
+          <p class="act-desc">{{ act.descripcion }}</p>
+          <div class="act-footer">
+            <span class="act-fecha">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ act.fecha }}
+            </span>
+            <span class="act-hora">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ act.hora }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- galería,Pendi  agregar de 10 images de libre de autor-->
+    <div class="section-block">
+      <div class="section-header">
+        <h3 class="section-title">Galería</h3>
+        <span class="section-link">Ver todo</span>
+      </div>
+      <p class="galeria-sub">Un recuerdo de nuestro día a día, llenos de alegría y aprendizaje.</p>
+      <div class="galeria-grid">
+        <div class="galeria-item" *ngFor="let img of galeriaItems"
+             [style.background]="img.color">
+          <img [src]="img.src" [alt]="img.alt" class="galeria-img"
+              onerror="this.style.display='none'"/>
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 24px"></div>
+  </div>
+
+  <!-- ── Sección Guardados ── -->
+  <div *ngIf="segmento === 'guardados'" class="guardados-section">
+
+    <div *ngIf="actividadesGuardadas.length === 0" class="empty-state">
+      <ion-icon name="bookmark-outline" class="empty-icon"></ion-icon>
+      <h4 class="empty-title">Sin guardados aún</h4>
+      <p class="empty-sub">Guarda actividades para verlas aquí</p>
+    </div>
+
+    <div class="act-list" *ngIf="actividadesGuardadas.length > 0">
+      <div class="act-card"
+           *ngFor="let act of actividadesGuardadas"
+           (click)="verDetalle(act)">
+        <div class="act-card-img" [style.background]="act.color">
+          <img [src]="act.imagen" [alt]="act.nombre" class="act-img"
+               onerror="this.style.display='none'"/>
+          <ion-badge class="act-badge" [style.background]="act.badgeColor">
+            {{ act.categoria }}
+          </ion-badge>
+          <button class="save-btn" (click)="toggleGuardar(act, $event)">
+            <ion-icon name="bookmark" color="warning"></ion-icon>
+          </button>
+        </div>
+        <div class="act-card-body">
+          <h4 class="act-nombre">{{ act.nombre }}</h4>
+          <p class="act-desc">{{ act.descripcion }}</p>
+          <div class="act-footer">
+            <span class="act-fecha">
+              <ion-icon name="calendar-outline"></ion-icon>
+              {{ act.fecha }}
+            </span>
+            <span class="act-hora">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ act.hora }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

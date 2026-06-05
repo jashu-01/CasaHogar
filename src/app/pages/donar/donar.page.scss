@@ -1,0 +1,576 @@
+$green-dark:  #1e5c1e;
+$green-mid:   #2d7a2d;
+$gold:        #c8912a;
+$cream:       #f5f0e8;
+$white:       #ffffff;
+$text-dark:   #1a1a1a;
+$text-muted:  #6b7280;
+$border:      #e8e2d9;
+
+// ──────────
+.donar-toolbar {
+  --background: #{$green-dark};
+  .donar-header-title { color: $white; font-weight: 700; font-size: 18px; }
+}
+
+.donar-content { --background: #{$cream}; }
+
+// ────────────────────────────
+.hero-donar {
+  height: 180px;
+  background: linear-gradient(135deg, #1e5c1e 0%, #c8912a 100%);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 20px 24px;
+
+  .hero-donar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.20);
+  }
+
+  .hero-donar-text {
+    position: relative;
+    z-index: 1;
+
+    .hero-donar-title {
+      color: $white;
+      font-size: 26px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .hero-donar-sub {
+      color: rgba(255,255,255,0.85);
+      font-size: 13.5px;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+}
+
+// ─────────────────────
+.tipo-section {
+  padding: 22px 16px 0;
+
+  .tipo-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 4px;
+  }
+
+  .tipo-sub {
+    font-size: 13px;
+    color: $text-muted;
+    margin: 0 0 18px;
+    line-height: 1.5;
+  }
+}
+
+.tipo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tipo-card {
+  background: $white;
+  border-radius: 16px;
+  padding: 16px 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s;
+  border: 1.5px solid transparent;
+
+  &:active {
+    transform: scale(0.97);
+    border-color: $green-mid;
+  }
+
+  .tipo-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    ion-icon { font-size: 24px; color: $white; }
+  }
+
+  .tipo-nombre {
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 4px;
+  }
+
+  .tipo-desc {
+    font-size: 11.5px;
+    color: $text-muted;
+    line-height: 1.5;
+    margin: 0 0 10px;
+  }
+
+  .tipo-arrow {
+    display: flex;
+    justify-content: flex-end;
+    ion-icon { font-size: 16px; color: $green-mid; }
+  }
+}
+
+.tipo-efectivo      { background: linear-gradient(135deg, #1e5c1e, #2d7a2d); }
+.tipo-transferencia { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+.tipo-ropa          { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+.tipo-juguetes      { background: linear-gradient(135deg, #b45309, #f59e0b); }
+.tipo-comida        { background: linear-gradient(135deg, #be123c, #f43f5e); }
+.tipo-medicamentos  { background: linear-gradient(135deg, #0369a1, #38bdf8); }
+
+// ──────────────────────────
+.impacto-strip {
+  margin: 20px 16px 0;
+  background: $green-dark;
+  border-radius: 16px;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .impacto-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .impacto-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: $white;
+    }
+
+    .impacto-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+  }
+
+  .impacto-sep {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.20);
+  }
+}
+
+// ────────────────────────
+.subpage-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px 4px;
+  background: $green-dark;
+
+  .back-btn-inline {
+    --color: #{$white};
+    --padding-start: 0;
+    ion-icon { font-size: 22px; }
+  }
+
+  .subpage-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $white;
+    margin: 0;
+  }
+}
+
+// ────────────────────────────
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 12px 16px 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+
+  .info-card-icon {
+    font-size: 26px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+
+  .info-card-text {
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 4px;
+
+    &:last-child { margin-bottom: 0; }
+  }
+}
+
+.info-green {
+  background: rgba(30,92,30,0.08);
+  border: 1px solid rgba(30,92,30,0.20);
+  .info-card-icon, .info-card-title { color: $green-dark; }
+  .info-card-text { color: darken($green-dark, 5%); }
+}
+
+.info-blue {
+  background: rgba(30,64,175,0.07);
+  border: 1px solid rgba(30,64,175,0.18);
+  .info-card-icon, .info-card-title { color: #1e40af; }
+  .info-card-text { color: #1e3a8a; }
+}
+
+.info-red {
+  background: rgba(185,28,28,0.07);
+  border: 1px solid rgba(185,28,28,0.18);
+  .info-card-icon, .info-card-title { color: #b91c1c; }
+  .info-card-text { color: #991b1b; }
+}
+
+.info-gold {
+  background: rgba(200,145,42,0.10);
+  border: 1px solid rgba(200,145,42,0.28);
+  .info-card-icon { color: $gold; }
+  .info-card-text { color: darken($gold, 10%); }
+}
+
+.acepta-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: inherit;
+}
+
+// ── formu ────────────────────────────────────────────
+.form-section {
+  padding: 16px 16px 0;
+}
+
+.form-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: $text-dark;
+  margin: 0 0 16px;
+}
+
+.input-group {
+  margin-bottom: 14px;
+
+  .input-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-dark;
+    display: block;
+    margin-bottom: 6px;
+  }
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: $white;
+  border: 1.5px solid $border;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 50px;
+  transition: border-color 0.2s;
+
+  &:focus-within { border-color: $green-mid; }
+
+  ion-icon {
+    font-size: 18px;
+    color: $text-muted;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .ci {
+    --background: transparent;
+    --color: #{$text-dark};
+    --placeholder-color: #{$text-muted};
+    --padding-start: 0;
+    font-size: 14px;
+    flex: 1;
+  }
+}
+
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.ci-area {
+  --background: #{$white};
+  --color: #{$text-dark};
+  --placeholder-color: #{$text-muted};
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 12px;
+  border: 1.5px solid $border;
+  border-radius: 12px;
+  font-size: 14px;
+  width: 100%;
+
+  &:focus-within { border-color: $green-mid; }
+}
+
+// ────────────────────────────────
+.montos-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .monto-chip {
+    --background: #{$white};
+    --color: #{$text-dark};
+    border: 1.5px solid $border;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.monto-active {
+      --background: #{$green-mid};
+      --color: #{$white};
+      border-color: #{$green-mid};
+    }
+  }
+}
+
+// ────────────────────────────
+.metodo-tabs {
+  display: flex;
+  margin: 12px 16px 0;
+  gap: 10px;
+
+  .metodo-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 46px;
+    border: 1.5px solid $border;
+    border-radius: 12px;
+    background: $white;
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-muted;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    ion-icon { font-size: 18px; }
+
+    &.metodo-active {
+      background: $green-dark;
+      color: $white;
+      border-color: $green-dark;
+    }
+  }
+}
+
+// ── Badge seguro ──────────────────────────────────────────
+.secure-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(30,92,30,0.08);
+  border: 1px solid rgba(30,92,30,0.20);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+
+  ion-icon { font-size: 18px; color: $green-mid; }
+
+  span { font-size: 12.5px; color: $green-dark; font-weight: 500; }
+}
+
+// ── Datos bancarios ───────────────────────────────────────
+.banco-card {
+  background: $white;
+  border-radius: 14px;
+  border: 1.5px solid $border;
+  padding: 16px;
+  margin-bottom: 4px;
+
+  .banco-titulo {
+    font-size: 15px;
+    font-weight: 700;
+    color: $text-dark;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border;
+  }
+
+  .banco-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0ece4;
+
+    &:last-child { border-bottom: none; }
+
+    .banco-label {
+      font-size: 12.5px;
+      color: $text-muted;
+    }
+
+    .banco-valor {
+      font-size: 13.5px;
+      color: $text-dark;
+      font-weight: 500;
+
+      &.copy-text {
+        color: $green-mid;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        ion-icon { font-size: 14px; }
+      }
+    }
+  }
+}
+
+// ── Resumen pago ──────────────────────────────────────────
+.resumen-pago {
+  background: $white;
+  border-radius: 12px;
+  border: 1.5px solid $border;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+
+  .resumen-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    color: $text-muted;
+    padding: 5px 0;
+  }
+
+  .resumen-total {
+    font-weight: 700;
+    font-size: 15px;
+    color: $text-dark;
+    border-top: 1px solid $border;
+    margin-top: 4px;
+    padding-top: 8px;
+  }
+}
+
+// ── Botones ───────────────────────────────────────────────
+.btn-confirmar {
+  --background: #{$green-dark};
+  --background-activated: #{$green-mid};
+  --border-radius: 12px;
+  --color: #{$white};
+  font-size: 15px;
+  font-weight: 600;
+  height: 52px;
+  margin-top: 4px;
+}
+
+.btn-outline-green {
+  --border-radius: 12px;
+  --color: #{$green-mid};
+  --border-color: #{$green-mid};
+  font-size: 15px;
+  font-weight: 600;
+  height: 52px;
+  margin-top: 10px;
+}
+
+// ── Pantalla de Gracias ───────────────────────────────────
+.gracias-container {
+  padding: 48px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .gracias-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $green-dark, $green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 28px rgba(30,92,30,0.35);
+
+    .gracias-icon {
+      font-size: 46px;
+      color: $white;
+    }
+  }
+
+  .gracias-titulo {
+    font-size: 26px;
+    font-weight: 800;
+    color: $text-dark;
+    margin: 0 0 10px;
+  }
+
+  .gracias-sub {
+    font-size: 14px;
+    color: $text-muted;
+    line-height: 1.7;
+    margin: 0 0 24px;
+    padding: 0 8px;
+  }
+
+  .gracias-card {
+    width: 100%;
+    background: $white;
+    border-radius: 16px;
+    border: 1.5px solid $border;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+
+    .gracias-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0ece4;
+
+      &:last-child { border-bottom: none; }
+
+      .gracias-label { font-size: 13px; color: $text-muted; }
+      .gracias-valor { font-size: 13.5px; font-weight: 600; color: $text-dark; }
+      .folio { color: $green-mid; font-family: monospace; letter-spacing: 1px; }
+    }
+  }
+
+  .email-aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(200,145,42,0.10);
+    border: 1px solid rgba(200,145,42,0.28);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 24px;
+    text-align: left;
+
+    ion-icon { font-size: 20px; color: $gold; flex-shrink: 0; margin-top: 2px; }
+
+    p { font-size: 13px; color: darken($gold, 12%); line-height: 1.6; margin: 0; }
+  }
+
+  .gracias-actions { width: 100%; }
+}

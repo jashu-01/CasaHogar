@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 
+
 export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'splash',
     pathMatch: 'full',
   },
   {
@@ -27,5 +28,9 @@ export const routes: Routes = [
       { path: 'perfil', loadComponent: () => import('./pages/perfil/perfil.page').then(m => m.PerfilPage) },
       { path: 'actividades',loadComponent: () => import('./pages/actividades/actividades.page').then( m => m.ActividadesPage)}
     ]
+  },
+  {
+    path: 'splash',
+    loadComponent: () => import('./pages/splash/splash.page').then( m => m.SplashPage)
   }
 ];

@@ -1,29 +1,130 @@
-<ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
+<!-- ✅ El ion-menu DEBE tener contentId apuntando al ion-router-outlet -->
+<ion-menu contentId="main-content" menuId="main-menu" side="start" type="overlay">
 
-  <ion-tab-bar slot="bottom" style="background: #2D5A27;"> <ion-tab-button tab="home" href="/tabs/home">
-      <ion-icon name="home"></ion-icon>
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-title>Casa Hogar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- ENCABEZADO DEL MENU LATERAEAL-->
+  <div class="menu-user-header">
+    <div class="menu-avatar">CH</div>
+    <div class="menu-user-info">
+      <p class="menu-user-name">Casa Hogar</p>
+      <p class="menu-user-email">hi@casahogar.com</p>
+    </div>
+  </div>
+
+  <ion-content>
+    <ion-list lines="none">
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/home" routerLinkActive="menu-active">
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/donar" routerLinkActive="menu-active">
+          <ion-icon name="heart-outline" slot="start"></ion-icon>
+          <ion-label>Donar</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/noticias" routerLinkActive="menu-active">
+          <ion-icon name="newspaper-outline" slot="start"></ion-icon>
+          <ion-label>Noticias</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/actividades" routerLinkActive="menu-active">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <ion-label>Actividades</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/perfil" routerLinkActive="menu-active">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-item-divider></ion-item-divider>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/perfil"
+                  [queryParams]="{vista:'notificaciones'}"
+                  routerLinkActive="menu-active">
+          <ion-icon name="notifications-outline" slot="start"></ion-icon>
+          <ion-label>Notificación</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/perfil"
+                  [queryParams]="{vista:'configuracion'}"
+                  routerLinkActive="menu-active">
+          <ion-icon name="settings-outline" slot="start"></ion-icon>
+          <ion-label>Configuración</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button routerLink="/tabs/perfil"
+                  [queryParams]="{vista:'soporte'}"
+                  routerLinkActive="menu-active">
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          <ion-label>Ayuda y Soporte</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-item-divider></ion-item-divider>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item button (click)="logout()" class="menu-logout">
+          <ion-icon name="log-out-outline" slot="start" color="danger"></ion-icon>
+          <ion-label color="danger">Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- ----------------------------- -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+
+    <ion-tab-button tab="home" href="/tabs/home">
+      <ion-icon name="home-outline"></ion-icon>
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="noticias" href="/tabs/noticias">
-      <ion-icon name="newspaper"></ion-icon>
+      <ion-icon name="newspaper-outline"></ion-icon>
       <ion-label>Noticias</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="donar" href="/tabs/donar">
-      <ion-icon name="heart"></ion-icon>
+      <ion-icon name="heart-outline"></ion-icon>
       <ion-label>Donar</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="actividades" href="/tabs/actividades">
-      <ion-icon name="calendar"></ion-icon>
+      <ion-icon name="calendar-outline"></ion-icon>
       <ion-label>Actividades</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="perfil" href="/tabs/perfil">
-      <ion-icon name="person"></ion-icon>
+      <ion-icon name="person-outline"></ion-icon>
       <ion-label>Perfil</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>

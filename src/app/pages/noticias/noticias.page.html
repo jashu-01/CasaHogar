@@ -1,10 +1,101 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Noticias</ion-title>
+  <ion-toolbar class="noticias-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="noticias-title">Casa Hogar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="search-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>Lo más reciente</h2>
-  <p>Contenido de las noticias aquí...</p>
+<ion-content [fullscreen]="true" class="noticias-content">
+
+  <!-- Toggle solo Casa Hogar -->
+  <div class="toggle-bar">
+    <span class="toggle-label">Solo Casa Hogar</span>
+    <ion-toggle
+      [(ngModel)]="soloOficial"
+      color="success"
+      class="toggle-switch">
+    </ion-toggle>
+  </div>
+
+  <!-- Feed de noticias -->
+  <div class="feed-container">
+
+    <div class="noticia-card" *ngFor="let n of noticias; let i = index">
+
+      <!-- Cabecera de la noticia -->
+      <div class="noticia-header">
+        <div class="noticia-avatar" [style.background]="n.avatarColor">
+          {{ n.iniciales }}
+        </div>
+        <div class="noticia-meta">
+          <span class="noticia-autor">{{ n.autor }}</span>
+          <span class="noticia-fecha">{{ n.fecha }}</span>
+        </div>
+        <ion-button fill="clear" class="menu-btn">
+          <ion-icon name="ellipsis-horizontal" color="medium"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- Imagen -->
+      <div class="noticia-img-wrap" *ngIf="n.imagen">
+        <img [src]="n.imagen" [alt]="n.titulo" class="noticia-img"
+             onerror="this.parentElement.style.background='#e8e2d9'; this.style.display='none'"/>
+      </div>
+
+      <!-- Texto -->
+      <div class="noticia-body">
+        <h4 class="noticia-titulo">{{ n.titulo }}</h4>
+        <p class="noticia-texto" [class.expanded]="n.expandido">{{ n.texto }}</p>
+        <span class="ver-mas-link" (click)="toggleExpand(i)"
+              *ngIf="n.texto.length > 120">
+          {{ n.expandido ? 'Ver menos' : 'Ver más' }}
+        </span>
+      </div>
+
+      <!-- Contador de reacciones -->
+      <div class="noticia-stats" *ngIf="n.likes > 0 || n.comentarios > 0">
+        <span class="stat-likes">
+          <span class="like-emoji">❤️</span> {{ n.likes }}
+        </span>
+        <span class="stat-comments" *ngIf="n.comentarios > 0">
+          {{ n.comentarios }} comentarios
+        </span>
+      </div>
+
+      <!-- Divisor -->
+      <div class="noticia-divider"></div>
+
+      <!-- Acciones -->
+      <div class="noticia-actions">
+        <button class="action-btn" [class.liked]="n.meGusta" (click)="toggleLike(i)">
+          <ion-icon [name]="n.meGusta ? 'heart' : 'heart-outline'"
+                    [color]="n.meGusta ? 'danger' : 'medium'">
+          </ion-icon>
+          <span>Me gusta</span>
+        </button>
+
+        <button class="action-btn" (click)="comentar(i)">
+          <ion-icon name="chatbubble-outline" color="medium"></ion-icon>
+          <span>Comentar</span>
+        </button>
+
+        <button class="action-btn" (click)="compartir(i)">
+          <ion-icon name="share-social-outline" color="medium"></ion-icon>
+          <span>Compartir</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div style="height: 20px"></div>
+
 </ion-content>

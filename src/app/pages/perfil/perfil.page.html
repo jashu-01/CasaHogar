@@ -1,13 +1,691 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-button *ngIf="vista !== 'perfil'" (click)="irA('perfil')">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-menu-button *ngIf="vista === 'perfil'"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ tituloActual }}</ion-title>
+    <ion-buttons slot="end" *ngIf="vista === 'editar'">
+      <ion-button (click)="guardarPerfil()" [disabled]="guardando">
+        <ion-spinner *ngIf="guardando" name="crescent" color="light"
+                     style="width:20px;height:20px"></ion-spinner>
+        <ion-icon *ngIf="!guardando" slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="light">
+
+  <!-- ══════════════════════════════════════════════════
+       PERFIL PRINCIPAL
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'perfil'">
+
+    <!-- Header con avatar y datos -->
+    <div class="perfil-header">
+      <!-- Avatar clickeable → opciones de foto -->
+      <div class="avatar-wrap" (click)="tapAvatar()">
+        <div class="avatar-circle">{{ iniciales }}</div>
+        <div class="avatar-badge">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        </div>
+      </div>
+      <h2 class="perfil-nombre">{{ usuario.nombre }} {{ usuario.apellidoP }}</h2>
+      <p class="perfil-email">{{ usuario.email }}</p>
+      <!-- Chip de estatus clickeable → info del estatus -->
+      <ion-chip color="success" outline="true" (click)="tapEstatus()">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <ion-label>Voluntario Activo</ion-label>
+      </ion-chip>
+    </div>
+
+    <!-- Stats clickeables → toast con detalle -->
+    <ion-card class="stats-card">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="stat-col" (click)="tapStat('meses')">
+              <p class="stat-num">12</p>
+              <p class="stat-lbl">Meses</p>
+            </ion-col>
+            <ion-col class="stat-col stat-border" (click)="tapStat('donado')">
+              <p class="stat-num">$950</p>
+              <p class="stat-lbl">Donado</p>
+            </ion-col>
+            <ion-col class="stat-col stat-border" (click)="tapStat('actividades')">
+              <p class="stat-num">47</p>
+              <p class="stat-lbl">Actividades</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mi cuenta -->
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Mi cuenta</ion-label></ion-list-header>
+
+      <ion-item button detail="true" (click)="irA('informacion')">
+        <ion-icon name="person-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>Información Personal</h3>
+          <p>Nombre, teléfono, fecha de nacimiento</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="irA('editar')">
+        <ion-icon name="create-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>Editar Perfil</h3>
+          <p>Actualiza tus datos y contraseña</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="irA('localidad')">
+        <ion-icon name="location-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>Localidad</h3>
+          <p>{{ usuario.localidad }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="irA('logros')">
+        <ion-icon name="trophy-outline" slot="start" color="warning"></ion-icon>
+        <ion-label>
+          <h3>Logros</h3>
+          <p>{{ logrosObtenidos }}/{{ logros.length }} logros desbloqueados</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Preferencias -->
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Preferencias</ion-label></ion-list-header>
+
+      <ion-item button detail="true" (click)="irA('notificaciones')">
+        <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <h3>Notificaciones</h3>
+          <p>{{ notifPendientes > 0 ? notifPendientes + ' pendientes' : 'Al día' }}</p>
+        </ion-label>
+        <ion-badge slot="end" color="danger" *ngIf="notifPendientes > 0">
+          {{ notifPendientes }}
+        </ion-badge>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="irA('configuracion')">
+        <ion-icon name="settings-outline" slot="start" color="medium"></ion-icon>
+        <ion-label>
+          <h3>Configuración</h3>
+          <p>Apariencia, idioma y privacidad</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Ayuda -->
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Ayuda</ion-label></ion-list-header>
+
+      <ion-item button detail="true" (click)="irA('soporte')">
+        <ion-icon name="help-circle-outline" slot="start" color="tertiary"></ion-icon>
+        <ion-label>
+          <h3>Soporte</h3>
+          <p>Preguntas frecuentes y contacto</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="abrirTerminos()">
+        <ion-icon name="document-text-outline" slot="start" color="medium"></ion-icon>
+        <ion-label>
+          <h3>Términos y Privacidad</h3>
+          <p>Políticas de uso de la app</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Cerrar sesión -->
+    <div class="logout-wrap">
+      <ion-button expand="block" fill="outline" color="danger"
+                  shape="round" (click)="confirmarLogout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </div>
+
+    <p class="version-lbl">Casa Hogar v1.0.0</p>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       INFORMACIÓN PERSONAL
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'informacion'">
+
+    <div class="info-avatar-header">
+      <div class="avatar-circle avatar-md" (click)="tapAvatar()">{{ iniciales }}</div>
+      <ion-button fill="clear" color="light" size="small" (click)="irA('editar')">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Editar datos
+      </ion-button>
+    </div>
+
+    <!-- Datos copiables al tap -->
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Datos personales</ion-label></ion-list-header>
+
+      <ion-item button (click)="copiarDato(usuario.nombre+' '+usuario.apellidoP+' '+usuario.apellidoM, 'Nombre')">
+        <ion-icon name="person-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <p>Nombre completo</p>
+          <h3>{{ usuario.nombre }} {{ usuario.apellidoP }} {{ usuario.apellidoM }}</h3>
+        </ion-label>
+        <ion-icon name="copy-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item button (click)="copiarDato(usuario.email, 'Correo')">
+        <ion-icon name="mail-outline" slot="start" color="success"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Correo electrónico</p>
+          <h3>{{ usuario.email }}</h3>
+        </ion-label>
+        <ion-icon name="copy-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item button (click)="copiarDato(usuario.telefono || '', 'Teléfono')">
+        <ion-icon name="call-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <p>Teléfono</p>
+          <h3>{{ usuario.telefono || 'Sin registrar' }}</h3>
+        </ion-label>
+        <ion-icon name="copy-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="calendar-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <p>Fecha de nacimiento</p>
+          <h3>{{ usuario.fechaNac || 'Sin registrar' }}</h3>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button (click)="irA('localidad')">
+        <ion-icon name="location-outline" slot="start" color="success"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <p>Localidad</p>
+          <h3>{{ usuario.localidad }}</h3>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Historial</ion-label></ion-list-header>
+
+      <ion-item>
+        <ion-icon name="time-outline" slot="start" color="warning"></ion-icon>
+        <ion-label><p>Miembro desde</p><h3>{{ usuario.miembroDesde }}</h3></ion-label>
+      </ion-item>
+
+      <ion-item button (click)="tapStat('donado')">
+        <ion-icon name="heart-outline" slot="start" color="danger"></ion-icon>
+        <ion-label><p>Total donado</p><h3>$950.00 MXN</h3></ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item button (click)="tapStat('actividades')">
+        <ion-icon name="ribbon-outline" slot="start" color="success"></ion-icon>
+        <ion-label><p>Actividades realizadas</p><h3>47 actividades</h3></ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <div class="btn-wrap">
+      <ion-button expand="block" color="success" shape="round" (click)="irA('editar')">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Editar Perfil
+      </ion-button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       EDITAR PERFIL
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'editar'">
+
+    <div class="info-avatar-header">
+      <div class="avatar-circle avatar-md" (click)="cambiarFoto()">{{ iniciales }}</div>
+      <ion-button fill="clear" color="light" size="small" (click)="cambiarFoto()">
+        <ion-icon name="camera-outline" slot="start"></ion-icon>
+        Cambiar foto
+      </ion-button>
+    </div>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Datos personales</ion-label></ion-list-header>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Nombre *</ion-label>
+        <ion-input [(ngModel)]="editForm.nombre" type="text" [clearInput]="true"></ion-input>
+        <ion-icon name="person-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Apellido Paterno *</ion-label>
+        <ion-input [(ngModel)]="editForm.apellidoP" type="text" [clearInput]="true"></ion-input>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Apellido Materno</ion-label>
+        <ion-input [(ngModel)]="editForm.apellidoM" type="text" [clearInput]="true"></ion-input>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Correo electrónico *</ion-label>
+        <ion-input [(ngModel)]="editForm.email" type="email" [clearInput]="true"></ion-input>
+        <ion-icon name="mail-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Teléfono</ion-label>
+        <ion-input [(ngModel)]="editForm.telefono" type="tel"></ion-input>
+        <ion-icon name="call-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Fecha de nacimiento</ion-label>
+        <ion-input [(ngModel)]="editForm.fechaNac" type="date"></ion-input>
+        <ion-icon name="calendar-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Cambiar contraseña</ion-label></ion-list-header>
+      <ion-note color="medium" style="padding:0 20px 8px; display:block; font-size:13px">
+        Deja en blanco si no deseas cambiarla
+      </ion-note>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Nueva contraseña</ion-label>
+        <ion-input [(ngModel)]="editForm.password"
+                   [type]="showPass ? 'text' : 'password'">
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePass()">
+          <ion-icon [name]="showPass ? 'eye-off-outline' : 'eye-outline'" color="medium"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Confirmar contraseña</ion-label>
+        <ion-input [(ngModel)]="editForm.passwordConfirm"
+                   [type]="showPassConf ? 'text' : 'password'">
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="togglePassConf()">
+          <ion-icon [name]="showPassConf ? 'eye-off-outline' : 'eye-outline'" color="medium"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <div class="btn-wrap">
+      <ion-button expand="block" color="success" shape="round" size="large"
+                  (click)="guardarPerfil()" [disabled]="guardando">
+        <ion-spinner *ngIf="guardando" name="crescent" slot="start"></ion-spinner>
+        <ion-icon *ngIf="!guardando" name="save-outline" slot="start"></ion-icon>
+        {{ guardando ? 'Guardando...' : 'Guardar Cambios' }}
+      </ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="irA('perfil')">
+        Cancelar
+      </ion-button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       GUARDADO EXITOSO
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'guardado'" class="exito-wrap">
+    <ion-icon name="checkmark-circle" color="success" class="exito-icon"></ion-icon>
+    <h2 class="exito-titulo">¡Se guardó exitosamente!</h2>
+    <p class="exito-sub">Tus datos han sido actualizados correctamente.</p>
+    <div class="btn-wrap" style="width:100%">
+      <ion-button expand="block" color="success" shape="round" (click)="irA('perfil')">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Volver a mi Perfil
+      </ion-button>
+      <ion-button expand="block" fill="clear" color="medium" (click)="irA('informacion')">
+        Ver mis datos
+      </ion-button>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       NOTIFICACIONES
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'notificaciones'">
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Alertas de la app</ion-label></ion-list-header>
+      <ion-item *ngFor="let n of configNotif">
+        <ion-icon [name]="n.icon" slot="start" [color]="n.color"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h3>{{ n.titulo }}</h3>
+          <p>{{ n.desc }}</p>
+        </ion-label>
+        <!-- Toggle con feedback al cambiar -->
+        <ion-toggle [(ngModel)]="n.activo" color="success" slot="end"
+                    (ionChange)="toggleNotif(n)">
+        </ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header>
+        <ion-label>Recientes</ion-label>
+        <ion-button fill="clear" size="small" color="success"
+                    (click)="marcarTodasLeidas()">
+          Leer todas
+        </ion-button>
+      </ion-list-header>
+
+      <!-- Cada notificación abre su detalle al tocar -->
+      <ion-item button *ngFor="let notif of notificaciones"
+                (click)="tapNotificacion(notif)">
+        <ion-icon [name]="notif.leida ? 'checkmark-done-outline' : 'ellipse'"
+                  slot="start"
+                  [color]="notif.leida ? 'medium' : 'success'">
+        </ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h3 [style.fontWeight]="notif.leida ? '400' : '700'">{{ notif.titulo }}</h3>
+          <p>{{ notif.cuerpo }}</p>
+          <p>{{ notif.fecha }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="btn-wrap">
+      <ion-button expand="block" fill="outline" color="medium" shape="round"
+                  (click)="marcarTodasLeidas()">
+        <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+        Marcar todas como leídas
+      </ion-button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       LOCALIDAD
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'localidad'">
+
+    <!-- Mapa placeholder clickeable → abre Google Maps -->
+    <div class="mapa-placeholder" (click)="abrirMapa()">
+      <ion-icon name="map-outline" class="mapa-icon"></ion-icon>
+      <p class="mapa-label">{{ usuario.localidad }}</p>
+      <p class="mapa-tap">Toca para ver en Google Maps</p>
+    </div>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Mi ubicación</ion-label></ion-list-header>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Estado</ion-label>
+        <ion-select [(ngModel)]="editForm.estado" interface="action-sheet"
+                    placeholder="Selecciona estado">
+          <ion-select-option value="veracruz">Veracruz</ion-select-option>
+          <ion-select-option value="oaxaca">Oaxaca</ion-select-option>
+          <ion-select-option value="puebla">Puebla</ion-select-option>
+          <ion-select-option value="cdmx">Ciudad de México</ion-select-option>
+          <ion-select-option value="jalisco">Jalisco</ion-select-option>
+          <ion-select-option value="nuevo_leon">Nuevo León</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Municipio / Localidad</ion-label>
+        <ion-input [(ngModel)]="editForm.localidad" type="text"
+                   placeholder="Ej: Córdoba"></ion-input>
+        <ion-icon name="location-outline" slot="end" color="medium"></ion-icon>
+      </ion-item>
+
+      <ion-item fill="outline" shape="round" class="edit-item">
+        <ion-label position="floating">Código Postal</ion-label>
+        <ion-input [(ngModel)]="editForm.cp" type="tel" maxlength="5"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="btn-wrap">
+      <ion-button expand="block" color="success" shape="round" size="large"
+                  (click)="guardarLocalidad()">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        Guardar Localidad
+      </ion-button>
+      <ion-button expand="block" fill="clear" color="primary" shape="round"
+                  (click)="abrirMapa()">
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        Ver en Google Maps
+      </ion-button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       LOGROS
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'logros'">
+
+    <ion-card class="logros-resumen">
+      <ion-card-content>
+        <div class="logros-total">
+          <ion-icon name="trophy-outline" color="warning"></ion-icon>
+          <span class="logros-num">{{ logrosObtenidos }}</span>
+          <span class="logros-de">/ {{ logros.length }} obtenidos</span>
+        </div>
+        <div class="logros-barra">
+          <div class="logros-barra-fill"
+               [style.width.%]="(logrosObtenidos / logros.length) * 100">
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Cada logro abre su detalle al tocar -->
+    <ion-list inset="true">
+      <ion-item button *ngFor="let logro of logros" (click)="tapLogro(logro)">
+        <div slot="start" class="logro-icon-wrap"
+             [class.logro-obtenido]="logro.obtenido">
+          <ion-icon [name]="logro.icon"
+                    [color]="logro.obtenido ? 'warning' : 'medium'">
+          </ion-icon>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h3 [style.color]="logro.obtenido ? '' : 'var(--ion-color-medium)'">
+            {{ logro.titulo }}
+          </h3>
+          <p>{{ logro.desc }}</p>
+        </ion-label>
+        <ion-icon *ngIf="logro.obtenido"
+                  name="checkmark-circle" color="success" slot="end">
+        </ion-icon>
+        <ion-icon *ngIf="!logro.obtenido"
+                  name="lock-closed-outline" color="medium" slot="end">
+        </ion-icon>
+      </ion-item>
+    </ion-list>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       CONFIGURACIÓN
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'configuracion'">
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Apariencia</ion-label></ion-list-header>
+
+      <ion-item>
+        <ion-icon name="moon-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Modo oscuro</ion-label>
+        <ion-toggle [(ngModel)]="config.modoOscuro" color="success" slot="end"
+                    (ionChange)="aplicarModoOscuro()">
+        </ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Tamaño de texto</ion-label>
+        <ion-select [(ngModel)]="config.tamanoTexto" slot="end"
+                    interface="popover"
+                    (ionChange)="cambiarTamanoTexto()">
+          <ion-select-option value="small">Pequeño</ion-select-option>
+          <ion-select-option value="medium">Mediano</ion-select-option>
+          <ion-select-option value="large">Grande</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Idioma y región</ion-label></ion-list-header>
+
+      <ion-item>
+        <ion-icon name="language-outline" slot="start" color="tertiary"></ion-icon>
+        <ion-label>Idioma</ion-label>
+        <ion-select [(ngModel)]="config.idioma" slot="end"
+                    interface="action-sheet"
+                    (ionChange)="cambiarIdioma()">
+          <ion-select-option value="es">🇲🇽 Español</ion-select-option>
+          <ion-select-option value="en">🇺🇸 English</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Privacidad</ion-label></ion-list-header>
+
+      <ion-item>
+        <ion-icon name="eye-outline" slot="start" color="success"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h3>Perfil público</h3>
+          <p>Otros voluntarios pueden ver tu perfil</p>
+        </ion-label>
+        <ion-toggle [(ngModel)]="config.perfilPublico" color="success" slot="end"
+                    (ionChange)="togglePerfilPublico()">
+        </ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="analytics-outline" slot="start" color="success"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h3>Datos de uso</h3>
+          <p>Compartir datos anónimos para mejorar la app</p>
+        </ion-label>
+        <ion-toggle [(ngModel)]="config.datosUso" color="success" slot="end"
+                    (ionChange)="toggleDatosUso()">
+        </ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Cuenta</ion-label></ion-list-header>
+
+      <ion-item button detail="true" (click)="cambiarPassword()">
+        <ion-icon name="key-outline" slot="start" color="warning"></ion-icon>
+        <ion-label>
+          <h3>Cambiar contraseña</h3>
+          <p>Actualiza tu contraseña de acceso</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="confirmarEliminarCuenta()">
+        <ion-icon name="trash-outline" slot="start" color="danger"></ion-icon>
+        <ion-label color="danger">
+          <h3>Eliminar cuenta</h3>
+          <p>Acción irreversible</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="btn-wrap">
+      <ion-button expand="block" color="success" shape="round"
+                  (click)="guardarConfig()">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        Guardar configuración
+      </ion-button>
+      <ion-button expand="block" fill="clear" color="medium"
+                  (click)="irA('perfil')">
+        Cancelar
+      </ion-button>
+    </div>
+    <div style="height:24px"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SOPORTE
+  ══════════════════════════════════════════════════ -->
+  <div *ngIf="vista === 'soporte'">
+
+    <ion-card color="success" class="soporte-banner">
+      <ion-card-content>
+        <ion-icon name="headset-outline" class="soporte-banner-icon"></ion-icon>
+        <h3>¿En qué podemos ayudarte?</h3>
+        <p>Estamos aquí para apoyarte</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Contáctanos</ion-label></ion-list-header>
+
+      <ion-item button detail="true" (click)="contactar('email')">
+        <ion-icon name="mail-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>Enviar correo</h3>
+          <p>soporte@casahogar.org.mx</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="contactar('whatsapp')">
+        <ion-icon name="logo-whatsapp" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>WhatsApp</h3>
+          <p>271-312-0055</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item button detail="true" (click)="contactar('telefono')">
+        <ion-icon name="call-outline" slot="start" color="success"></ion-icon>
+        <ion-label>
+          <h3>Llamar directamente</h3>
+          <p>271-312-0055 · Lun–Vie 9:00–17:00</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list inset="true">
+      <ion-list-header><ion-label>Preguntas frecuentes</ion-label></ion-list-header>
+
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let faq of faqs" [value]="faq.id">
+          <ion-item slot="header" color="light">
+            <ion-label class="ion-text-wrap">{{ faq.pregunta }}</ion-label>
+          </ion-item>
+          <div slot="content" class="faq-respuesta">
+            <p>{{ faq.respuesta }}</p>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-list>
+
+    <div style="height:24px"></div>
+  </div>
+
 </ion-content>

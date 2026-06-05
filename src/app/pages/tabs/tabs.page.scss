@@ -1,0 +1,80 @@
+// ── Cabecera de usuario en el menú ───────────────────────
+.menu-user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 16px;
+  background: var(--ion-color-success);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+
+  .menu-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.20);
+    border: 2px solid rgba(255,255,255,0.40);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .menu-user-info {
+    flex: 1;
+    overflow: hidden;
+
+    .menu-user-name {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-user-email {
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// ── Items del menú ────────────────────────────────────────
+ion-menu {
+  ion-item {
+    --padding-start: 16px;
+    --min-height: 48px;
+    font-size: 15px;
+
+    ion-icon {
+      font-size: 20px;
+      margin-right: 4px;
+    }
+  }
+
+  // Item activo (ruta actual)
+  .menu-active {
+    --background: rgba(var(--ion-color-success-rgb), 0.10);
+    --color: var(--ion-color-success);
+
+    ion-icon { color: var(--ion-color-success) !important; }
+  }
+
+  ion-item-divider {
+    --background: var(--ion-color-light);
+    --padding-start: 16px;
+    min-height: 8px;
+  }
+
+  .menu-logout {
+    margin-top: 4px;
+  }
+}
