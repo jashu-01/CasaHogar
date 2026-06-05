@@ -10,7 +10,7 @@ import {
   IonIcon 
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { personOutline, lockClosedOutline } from 'ionicons/icons';
+import { personOutline, lockClosedOutline, mailOutline, logoGoogle, logoFacebook } from 'ionicons/icons';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ import { personOutline, lockClosedOutline } from 'ionicons/icons';
 export class LoginPage implements OnInit {
 
   constructor(private router: Router) { 
-    addIcons({ personOutline, lockClosedOutline });
+    addIcons({mailOutline,lockClosedOutline,logoGoogle,logoFacebook,personOutline});
   }
   
   goToLogin() {
