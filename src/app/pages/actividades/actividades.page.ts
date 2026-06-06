@@ -117,7 +117,7 @@ export class ActividadesPage {
     addIcons({
       filterOutline, bookmarkOutline, bookmark,
       calendarOutline, timeOutline, schoolOutline,
-      musicalNotesOutline, bookOutline, footballOutline,statu
+      musicalNotesOutline, bookOutline, footballOutline,
       brushOutline, appsOutline
     });
   }
