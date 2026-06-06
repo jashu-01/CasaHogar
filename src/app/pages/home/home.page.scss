@@ -163,6 +163,20 @@ swiper-container {
   --box-shadow: 0 2px 8px rgba(0,0,0,.07);
   margin: 0;
 
+.hero-card {
+  position: relative;
+  // Ajusta esto según el tamaño de tus imágenes
+  min-height: 400px; 
+}
+
+.hero-card-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+
   ion-card-content {
     padding: 14px 4px 12px;
     display: flex;
@@ -188,6 +202,36 @@ swiper-container {
       line-height: 1.2;
     }
   }
+}
+/* Configuración del contenedor Swiper */
+swiper-container {
+  width: 100%;
+  height: 300px; /* Ajusta según el diseño */
+}
+
+.carousel-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-text {
+    position: absolute;
+    bottom: 20px;
+    left: 16px;
+    z-index: 2;
+    color: white;
+  }
+}
+
+/*  */
+swiper-container::part(bullet-active) {
+  background: var(--ion-color-primary);
 }
 
 // ══ ACTIVIDADES ══════════════════════════════════════════════════════════

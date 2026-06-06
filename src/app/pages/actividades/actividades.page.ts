@@ -60,7 +60,7 @@ export class ActividadesPage {
       descripcion: 'Refuerzo académico de álgebra y aritmética para niños de primaria. Grupos pequeños para mejor atención.',
       fecha:       'Lun, Mar, Vie',
       hora:        '4:00 PM',
-      imagen:      'assets/actividades/matematicas.jpg',
+      imagen:      'assets/ima1.png',
       color:       '#1e5c1e',
       badgeColor:  '#047857',
       catValor:    'clases',
@@ -72,7 +72,7 @@ export class ActividadesPage {
       descripcion: 'Aprende guitarra, piano y percusión con nuestros instructores voluntarios. Para todas las edades.',
       fecha:       'Miércoles',
       hora:        '5:00 PM',
-      imagen:      'assets/actividades/musica.jpg',
+      imagen:      'assets/ima2.png',
       color:       '#7c3aed',
       badgeColor:  '#6d28d9',
       catValor:    'musica',
@@ -84,7 +84,7 @@ export class ActividadesPage {
       descripcion: 'Exploramos libros y cuentos juntos. Fomentamos el hábito de la lectura desde pequeños.',
       fecha:       'Jueves',
       hora:        '3:30 PM',
-      imagen:      'assets/actividades/lectura.jpg',
+      imagen:      'assets/ima3.png',
       color:       '#0369a1',
       badgeColor:  '#075985',
       catValor:    'lectura',
@@ -96,7 +96,7 @@ export class ActividadesPage {
       descripcion: 'Práctica deportiva en equipo para promover la salud, disciplina y trabajo en conjunto.',
       fecha:       'Sábados',
       hora:        '10:00 AM',
-      imagen:      'assets/actividades/deportes.jpg',
+      imagen:      'assets/ima1.png',
       color:       '#b45309',
       badgeColor:  '#92400e',
       catValor:    'deportes',
@@ -105,19 +105,19 @@ export class ActividadesPage {
   ];
 
   galeriaItems = [
-    { src: 'assets/galeria/g1.jpg', alt: 'Evento 1', color: '#d4e8d4' },
-    { src: 'assets/galeria/g2.jpg', alt: 'Evento 2', color: '#d4dce8' },
-    { src: 'assets/galeria/g3.jpg', alt: 'Evento 3', color: '#e8d4d4' },
-    { src: 'assets/galeria/g4.jpg', alt: 'Evento 4', color: '#e8e4d4' },
-    { src: 'assets/galeria/g5.jpg', alt: 'Evento 5', color: '#e4d4e8' },
-    { src: 'assets/galeria/g6.jpg', alt: 'Evento 6', color: '#d4e8e4' },
+    { src: 'assets/ima8.png', alt: 'Evento 1', color: '#d4e8d4' },
+    { src: 'assets/ima7.png', alt: 'Evento 2', color: '#d4dce8' },
+    { src: 'assets/ima6.png', alt: 'Evento 3', color: '#e8d4d4' },
+    { src: 'assets/ima5.png', alt: 'Evento 4', color: '#e8e4d4' },
+    { src: 'assets/ima4.png', alt: 'Evento 5', color: '#e4d4e8' },
+    { src: 'assets/ima3.png', alt: 'Evento 6', color: '#d4e8e4' },
   ];
 
   constructor() {
     addIcons({
       filterOutline, bookmarkOutline, bookmark,
       calendarOutline, timeOutline, schoolOutline,
-      musicalNotesOutline, bookOutline, footballOutline,
+      musicalNotesOutline, bookOutline, footballOutline,statu
       brushOutline, appsOutline
     });
   }

@@ -16,6 +16,37 @@
 <ion-content [fullscreen]="true" class="home-content">
 
   <!--  carrusel de imagen -->
+   <swiper-container [loop]="true" [pagination]="true" [autoplay]="swiperAutoplay">
+  <swiper-slide *ngFor="let slide of heroSlides">
+    <ion-card class="hero-card">
+      <img [src]="slide.img" [alt]="slide.alt" class="hero-img" />
+      <div class="hero-overlay"></div>
+
+      <ion-card-header class="hero-card-header">
+        <ion-chip class="hero-chip" outline="true">
+          <ion-label>Comunidad activa</ion-label>
+        </ion-chip>
+        <ion-card-title class="hero-heading">
+          {{ slide.titulo }}
+        </ion-card-title>
+        <ion-card-subtitle class="hero-subtitle">
+          {{ slide.subtitulo }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content class="hero-card-content">
+        <ion-button expand="block" class="btn-apoyar" (click)="goToDonar()">
+          <ion-icon name="heart" slot="start"></ion-icon>
+          APOYAR AHORA
+        </ion-button>
+        <ion-button expand="block" fill="outline" class="btn-conocenos" (click)="goToVoluntarios()">
+          CONÓCENOS
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </swiper-slide>
+</swiper-container>
+  <!-----------------------------------------------------------
   <ion-card class="hero-card">
     <img src="../../../assets/ima2.png" alt="Niños Casa Hogar" class="hero-img"
          onerror="this.style.display='none'" />
@@ -32,7 +63,7 @@
         Cada niño merece un hogar lleno de amor
       </ion-card-subtitle>
     </ion-card-header>
-<!--seccion para apartar imagenes de botones -->
+!----------------------seccion para apartar imagenes de botones --
     <ion-card-content class="hero-card-content">
       <ion-button expand="block" class="btn-apoyar" (click)="goToDonar()">
         <ion-icon name="heart" slot="start"></ion-icon>
@@ -45,7 +76,7 @@
     </ion-card-content>
   </ion-card>
 
-
+------------------------------------------------------------------------------------->
 
   <!-- PENDIENTE para la valoraciones de los valores y seguridad-->
   <div class="section-block">
